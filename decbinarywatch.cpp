@@ -1,16 +1,45 @@
 #include "decbinarywatch.h"
+#include <QSGSimpleRectNode>
 
 DecBinaryWatch::DecBinaryWatch(QQuickItem *parent):
-    QQuickItem(parent)
+    QQuickItem(parent),
+    m_full(250, 250, 250, 200),
+    m_empty(20, 20, 20, 200),
+    m_time(QTime::currentTime())
 {
-    // By default, QQuickItem does not draw anything. If you subclass
-    // QQuickItem to create a visual item, you will need to uncomment the
-    // following line and re-implement updatePaintNode()
-
-    // setFlag(ItemHasContents, true);
+    setFlag(QQuickItem::ItemHasContents);
 }
 
-DecBinaryWatch::~DecBinaryWatch()
+QTime DecBinaryWatch::time() const
 {
+    return m_time;
 }
 
+void DecBinaryWatch::setTime(const QTime& time)
+{
+    if (time != m_time)
+    {
+        m_time = time;
+        update();
+        emit timeChanged();
+    }
+}
+
+QSGNode* DecBinaryWatch::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
+{
+    QSGSimpleRectNode* node = static_cast<QSGSimpleRectNode*>(oldNode);
+    if (!node)
+    {
+        node = new QSGSimpleRectNode();
+    }
+    if (time().second()%2 == 0)
+    {
+        node->setColor(m_empty);
+    }
+    else
+    {
+        node->setColor(m_full);
+    }
+    node->setRect(boundingRect());
+    return node;
+}

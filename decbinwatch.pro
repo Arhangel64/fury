@@ -4,7 +4,7 @@ QT += qml quick
 CONFIG += qt plugin
 
 TARGET = $$qtLibraryTarget($$TARGET)
-uri = org.kde.plasma.W
+uri = ru.radiow.fury
 
 # Input
 SOURCES += \

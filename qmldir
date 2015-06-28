@@ -1,3 +1,3 @@
-module org.kde.plasma.W
+module ru.radiow.fury
 plugin DecBinWatch
 

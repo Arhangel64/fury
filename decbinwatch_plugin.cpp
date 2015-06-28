@@ -5,8 +5,8 @@
 
 void DecBinWatchPlugin::registerTypes(const char *uri)
 {
-    // @uri org.kde.plasma.W
-    qmlRegisterType<DecBinaryWatch>(uri, 1, 0, "DecBinaryWatch");
+    // @uri ru.radiow.fury
+    qmlRegisterType<DecBinaryWatch>(uri, 0, 1, "DecBinaryWatch");
 }
 
 
