@@ -7,25 +7,7 @@
 #include <QTime>
 #include <QDateTime>
 
-class WatchModel
-{
-public:
-    WatchModel();
-
-    quint32 setTime(const QTime&);
-    QTime getTime() const;
-
-    quint32 getSum() const;
-
-private:
-    quint32 sum;
-    quint8 hh;
-    quint8 hl;
-    quint8 mh;
-    quint8 ml;
-    quint8 sh;
-    quint8 sl;
-};
+#include "watchmodel.h"
 
 class DecBinaryWatch : public QQuickItem
 {
@@ -61,6 +43,7 @@ private:
 
     quint32 map;
 };
+
 
 #endif // DECBINARYWATCH_H
 
