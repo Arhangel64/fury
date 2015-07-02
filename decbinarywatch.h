@@ -40,6 +40,7 @@ private:
     QColor off_color;
 
     bool invalidColor;
+    QRectF oldBounds;
 
     quint32 map;
 };

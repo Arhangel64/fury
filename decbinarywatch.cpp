@@ -1,4 +1,5 @@
 #include "decbinarywatch.h"
+#include "qsgdecbinarywatch.h"
 #include <QSGSimpleRectNode>
 #include <QtDebug>
 
@@ -25,6 +26,7 @@ void DecBinaryWatch::setTime(const QTime& time)
     qDebug() << map;
     if (map)
     {
+        qDebug() << m_time.getSum();
         update();
         emit timeChanged();
     }
@@ -62,20 +64,35 @@ void DecBinaryWatch::setOffColor(const QColor& color)
 
 QSGNode* DecBinaryWatch::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
 {
-    QSGSimpleRectNode* node = static_cast<QSGSimpleRectNode*>(oldNode);
+    QSGDecBinaryWatch* node = static_cast<QSGDecBinaryWatch*>(oldNode);
     if (!node)
     {
-        node = new QSGSimpleRectNode();
+        node = new QSGDecBinaryWatch();
     }
-    if (m_time.getSum() & 1)
+
+    QRectF newBounds = boundingRect();
+    if (oldBounds != newBounds)
     {
-        node->setColor(off_color);
+        node->setRect(newBounds);
+        oldBounds = newBounds;
     }
-    else
+    quint32 c_time = m_time.getSum();
+    if (invalidColor)
     {
-        node->setColor(on_color);
+        for (quint8 i = 0; i < 24; ++i)
+        {
+            QSGSimpleRectNode* digit = static_cast<QSGSimpleRectNode*>(node->childAtIndex(i));
+            if (c_time & 1)
+            {
+                digit->setColor(on_color);
+            }
+            else
+            {
+                digit->setColor(off_color);
+            }
+            c_time >>= 1;
+        }
+        invalidColor = false;
     }
-    node->setRect(boundingRect());
-    invalidColor = false;
     return node;
 }

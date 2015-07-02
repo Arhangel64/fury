@@ -10,12 +10,14 @@ uri = ru.radiow.fury
 SOURCES += \
     decbinwatch_plugin.cpp \
     decbinarywatch.cpp \
-    watchmodel.cpp
+    watchmodel.cpp \
+    qsgdecbinarywatch.cpp
 
 HEADERS += \
     decbinwatch_plugin.h \
     decbinarywatch.h \
-    watchmodel.h
+    watchmodel.h \
+    qsgdecbinarywatch.h
 
 DISTFILES = qmldir
 
