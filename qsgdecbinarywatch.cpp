@@ -1,5 +1,6 @@
 #include "qsgdecbinarywatch.h"
 #include <QColor>
+#include <QtMath>
 
 QSGDecBinaryWatch::QSGDecBinaryWatch():
     QSGSimpleRectNode()
@@ -13,10 +14,13 @@ QSGDecBinaryWatch::QSGDecBinaryWatch():
 
 void QSGDecBinaryWatch::setRect(const QRectF &rect)
 {
-    qreal he(4*rect.height()/19);
-    qreal we(4*rect.width()/29);
-    qreal hg(rect.height()/19);
-    qreal wg(rect.width()/29);
+    qreal wg(qBound(2.0, qMin(rect.width()/29, rect.height()/19), 10.0));
+
+    qreal hg(wg);
+
+    qreal he((rect.height() - 3 * hg)/4);
+    qreal we((rect.width() - 5 * wg)/6);
+
     qreal top = rect.top();
     qreal left = rect.left();
     QSGSimpleRectNode* node;

@@ -2,6 +2,7 @@
 #include <QtMath>
 
 WatchModel::WatchModel():
+    sum(0),
     hh(0),
     hl(0),
     mh(0),
@@ -20,9 +21,9 @@ quint32 WatchModel::setTime(const QTime& time)
     quint8 lsh(qFloor(time.second() / 10));
     quint8 lsl(time.second() % 10);
 
-    quint32 lsum = lsl | (lsh << 4) | (lml << 8) | (lmh << 12) | (lhl << 16) | (lhh << 24);
+    quint32 lsum = lsl | (lsh << 4) | (lml << 8) | (lmh << 12) | (lhl << 16) | (lhh << 20);
 
-    quint32 esum = ~(~(lsum | sum) | (lsum & sum));
+    quint32 esum = ~((~(lsum | sum)) | (lsum & sum));
     if (esum)
     {
         hh = lhh;

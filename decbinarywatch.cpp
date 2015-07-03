@@ -1,7 +1,6 @@
 #include "decbinarywatch.h"
 #include "qsgdecbinarywatch.h"
 #include <QSGSimpleRectNode>
-#include <QtDebug>
 
 DecBinaryWatch::DecBinaryWatch(QQuickItem *parent):
     QQuickItem(parent),
@@ -12,6 +11,7 @@ DecBinaryWatch::DecBinaryWatch(QQuickItem *parent):
 {
     setFlag(QQuickItem::ItemHasContents);
     m_time.setTime(QTime::currentTime());
+    startTimer(1000);
 }
 
 QTime DecBinaryWatch::time() const
@@ -22,11 +22,9 @@ QTime DecBinaryWatch::time() const
 void DecBinaryWatch::setTime(const QTime& time)
 {
 
-    quint32 map = m_time.setTime(time);
-    qDebug() << map;
+    map = m_time.setTime(time);
     if (map)
     {
-        qDebug() << m_time.getSum();
         update();
         emit timeChanged();
     }
@@ -77,11 +75,13 @@ QSGNode* DecBinaryWatch::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *
         oldBounds = newBounds;
     }
     quint32 c_time = m_time.getSum();
+    quint8 i(0);
+    QSGSimpleRectNode* digit;
     if (invalidColor)
     {
-        for (quint8 i = 0; i < 24; ++i)
+        for (i = 0; i < 24; ++i)
         {
-            QSGSimpleRectNode* digit = static_cast<QSGSimpleRectNode*>(node->childAtIndex(i));
+            digit = static_cast<QSGSimpleRectNode*>(node->childAtIndex(i));
             if (c_time & 1)
             {
                 digit->setColor(on_color);
@@ -94,5 +94,31 @@ QSGNode* DecBinaryWatch::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *
         }
         invalidColor = false;
     }
+    else if (map)
+    {
+        for (i = 0; i < 24; ++i)
+        {
+            if (map & 1)
+            {
+                digit = static_cast<QSGSimpleRectNode*>(node->childAtIndex(i));
+                if (c_time & 1)
+                {
+                    digit->setColor(on_color);
+                }
+                else
+                {
+                    digit->setColor(off_color);
+                }
+            }
+            c_time >>= 1;
+            map >>= 1;
+        }
+        map = 0;
+    }
     return node;
+}
+
+void DecBinaryWatch::timerEvent(QTimerEvent *)
+{
+    setTime(QTime::currentTime());
 }

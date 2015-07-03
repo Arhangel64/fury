@@ -6,6 +6,7 @@
 #include <QColor>
 #include <QTime>
 #include <QDateTime>
+#include <QTimerEvent>
 
 #include "watchmodel.h"
 
@@ -29,6 +30,9 @@ public:
     void setOffColor(const QColor& color);
 
     QSGNode* updatePaintNode(QSGNode *, UpdatePaintNodeData *);
+
+protected:
+    void timerEvent(QTimerEvent *);
 
 signals:
     void timeChanged();
