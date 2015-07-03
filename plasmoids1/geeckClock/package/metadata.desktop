@@ -1,0 +1,22 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=GeeckClock
+Comment=Clock widget
+Icon=chronometer
+ 
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-DefaultSize=200,100
+ 
+X-KDE-PluginInfo-Author=betrayer
+X-KDE-PluginInfo-Email=arhangel64@bk.ru
+X-KDE-PluginInfo-Website=http://plasma.kde.org/
+X-KDE-PluginInfo-Category=Date and Time
+X-KDE-PluginInfo-Name=org.kde.geeckClock
+X-KDE-PluginInfo-Version=0.1.0
+ 
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-ServiceTypes=Plasma/Applet
+Type=Service
