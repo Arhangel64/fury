@@ -11,7 +11,6 @@ DecBinaryWatch::DecBinaryWatch(QQuickItem *parent):
 {
     setFlag(QQuickItem::ItemHasContents);
     m_time.setTime(QTime::currentTime());
-    startTimer(1000);
 }
 
 QTime DecBinaryWatch::time() const
@@ -118,7 +117,12 @@ QSGNode* DecBinaryWatch::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *
     return node;
 }
 
-void DecBinaryWatch::timerEvent(QTimerEvent *)
+
+void DecBinaryWatch::itemChange(ItemChange change, const ItemChangeData& value)
 {
-    setTime(QTime::currentTime());
+    if (change == ItemSceneChange && value.window)
+    {
+        invalidColor = true;
+    }
+    QQuickItem::itemChange(change, value);
 }

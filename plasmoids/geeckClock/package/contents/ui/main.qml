@@ -4,18 +4,26 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import ru.radiow.fury 0.1
  
 Item {
-    Plasmoid.compactRepresentation: DecBinaryWatch {
-        anchors.fill: parent
-        id: clock
-        time: new Date()
-        onColor: theme.viewTextColor
-        offColor: theme.viewBackgroundColor
+    id: root
+    property date time: ds.data.Local.DateTime
+    PlasmaCore.DataSource {
+        id: ds
+        engine: "time"
+        connectedSources: ["Local"]
+        interval: 500
     }
-    Plasmoid.fullRepresentation: DecBinaryWatch {
-        anchors.fill: parent
-        id: clock
-        time: new Date()
-        onColor: theme.viewTextColor
-        offColor: theme.viewBackgroundColor
+    
+    Component {
+        id: watch
+        DecBinaryWatch {
+            id: view
+            anchors.fill: parent
+            time: root.time
+            onColor: theme.viewTextColor
+            offColor: theme.viewBackgroundColor
+        }
     }
+    
+    Plasmoid.compactRepresentation: watch
+    Plasmoid.fullRepresentation: watch
 }

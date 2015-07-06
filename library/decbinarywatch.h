@@ -32,7 +32,7 @@ public:
     QSGNode* updatePaintNode(QSGNode *, UpdatePaintNodeData *);
 
 protected:
-    void timerEvent(QTimerEvent *);
+    void itemChange(ItemChange change, const ItemChangeData& value);
 
 signals:
     void timeChanged();
