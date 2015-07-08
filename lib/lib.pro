@@ -1,24 +1,10 @@
-TEMPLATE = lib
-TARGET = DecBinWatch
-QT += qml quick
-CONFIG += qt plugin
+TEMPLATE = subdirs
 
-TARGET = $$qtLibraryTarget($$TARGET)
+SUBDIRS += \
+    decBinWatch/decbinwatch.pro \
+    ringsWatch/ringswatch.pro
+
 uri = ru.radiow.fury
-
-# Input
-SOURCES += \
-    decbinwatch_plugin.cpp \
-    decbinarywatch.cpp \
-    watchmodel.cpp \
-    qsgdecbinarywatch.cpp
-
-HEADERS += \
-    decbinwatch_plugin.h \
-    decbinarywatch.h \
-    watchmodel.h \
-    qsgdecbinarywatch.h
-
 DISTFILES = qmldir
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
@@ -36,4 +22,3 @@ unix {
     target.path = $$installPath
     INSTALLS += target qmldir
 }
-

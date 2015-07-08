@@ -1,0 +1,3 @@
+module ru.radiow.fury
+plugin RingsWatch
+plugin DecBinWatch
