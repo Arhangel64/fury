@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=Geeck clock
 Comment=Clock widget
-Icon=chronometer
+Icon=preferences-system-time
  
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml

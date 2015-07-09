@@ -12,7 +12,7 @@ Item {
         id: ds
         engine: "time"
         connectedSources: ["Local"]
-        interval: 500
+        interval: 1000
     }
     
     Component {
@@ -23,7 +23,7 @@ Item {
             time: root.time
             onColor: theme.viewTextColor
             offColor: theme.viewBackgroundColor
-            opacity: 0.85
+            opacity: 0.9
             
             MouseArea {
             anchors.fill: parent
@@ -34,6 +34,8 @@ Item {
     
     Plasmoid.backgroundHints: "NoBackground";
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+    Plasmoid.toolTipMainText: Qt.formatDate(root.time,"dddd")
+    Plasmoid.toolTipSubText: Qt.formatDate(root.time, Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
     
     Plasmoid.compactRepresentation: watch
     
