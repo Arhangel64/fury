@@ -1,6 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=GeeckClock
+Name=Geeck clock
 Comment=Clock widget
 Icon=chronometer
  
@@ -13,7 +13,7 @@ X-KDE-PluginInfo-Email=arhangel64@bk.ru
 X-KDE-PluginInfo-Website=http://plasma.kde.org/
 X-KDE-PluginInfo-Category=Date and Time
 X-KDE-PluginInfo-Name=org.kde.geeckClock
-X-KDE-PluginInfo-Version=0.1.0
+X-KDE-PluginInfo-Version=0.1.1
  
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
