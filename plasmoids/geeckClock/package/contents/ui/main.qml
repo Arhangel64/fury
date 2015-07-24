@@ -15,29 +15,23 @@ Item {
         interval: 1000
     }
     
-    Component {
-        id: watch
-        DecBinaryWatch {
-            id: view
-            anchors.fill: parent
-            time: root.time
-            onColor: theme.viewTextColor
-            offColor: theme.viewBackgroundColor
-            opacity: 0.9
-            
-            MouseArea {
-            anchors.fill: parent
-            onClicked: plasmoid.expanded = !plasmoid.expanded
-        }
-        }
-    }
-    
-    Plasmoid.backgroundHints: "NoBackground";
+    //Plasmoid.backgroundHints: "NoBackground";
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
     Plasmoid.toolTipMainText: Qt.formatDate(root.time,"dddd")
     Plasmoid.toolTipSubText: Qt.formatDate(root.time, Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
     
-    Plasmoid.compactRepresentation: watch
+    Plasmoid.compactRepresentation: DecBinaryWatch {
+        id: view
+        anchors.fill: parent
+        time: root.time
+        onColor: theme.viewTextColor
+        offColor: theme.viewBackgroundColor
+            
+        MouseArea {
+            anchors.fill: parent
+            onClicked: plasmoid.expanded = !plasmoid.expanded
+        }
+    }
     
     Plasmoid.fullRepresentation: PlasmaCalendar.MonthView {
         Layout.minimumWidth: units.gridUnit * 20
